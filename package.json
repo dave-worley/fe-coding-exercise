@@ -30,7 +30,7 @@
     "@storybook/addon-options": "^3.3.13",
     "@storybook/addons": "^3.3.13",
     "@storybook/react": "^3.3.13",
-    "babel-eslint": "^7",
+    "babel-eslint": "^10.0.3",
     "babel-plugin-emotion": "^8.0.4",
     "babel-plugin-inline-react-svg": "^0.4.0",
     "babel-plugin-transform-define": "^1.3.0",
@@ -44,7 +44,7 @@
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.3.0",
+    "eslint-plugin-react": "^7.16.0",
     "jest": "^22.4.2",
     "jest-glamor-react": "^3.1.2",
     "nodemon": "^1.11.0",
@@ -71,7 +71,11 @@
       "!storybook/**",
       "!tmp/**"
     ],
-    "coverageReporters": ["json", "lcov", "text-summary"],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text-summary"
+    ],
     "setupFiles": [
       "<rootDir>/jest/setup/polyfill.js",
       "<rootDir>/jest/setup/test-setup.js"
@@ -108,23 +112,19 @@
     }
   ],
   "scripts": {
-    "bundle:analyze":
-      "webpack-bundle-analyzer .next/webpack-stats.json .next/bundles",
+    "bundle:analyze": "webpack-bundle-analyzer .next/webpack-stats.json .next/bundles",
     "bundle:size": "bundlesize",
     "dev": "yarn run process:dev",
     "jest": "jest",
     "jest:update": "jest --updateSnapshot",
     "jest:watch": "jest --watch",
     "lint": "eslint --cache --ignore-path .gitignore --ext .js --ext .jsx .",
-    "format":
-      "prettier-eslint --ignore \"**/.next/**\" --ignore \"**/tmp/**\" --write \"**/*.{js,jsx}\"",
+    "format": "prettier-eslint --ignore \"**/.next/**\" --ignore \"**/tmp/**\" --write \"**/*.{js,jsx}\"",
     "format:file": "prettier-eslint --write",
     "next:build": "NODE_ENV=production next build",
-    "process:dev":
-      "NODE_ENV=development nodemon --watch next.config.js --watch config --watch server --ext js,json server/index.js",
+    "process:dev": "NODE_ENV=development nodemon --watch next.config.js --watch config --watch server --ext js,json server/index.js",
     "process:server": "node server/index.js",
-    "storybook":
-      "BABEL_ENV=storybook start-storybook --config-dir storybook --port 6006",
+    "storybook": "BABEL_ENV=storybook start-storybook --config-dir storybook --port 6006",
     "test": "yarn run lint && yarn run jest"
   }
 }
