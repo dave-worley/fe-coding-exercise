@@ -1,4 +1,4 @@
-import { Fragment, Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Header from '../lib/components/header';
@@ -9,7 +9,7 @@ import TwoColumn, {
 
 export default class FDAPage extends Component {
   static propTypes = {
-    content: PropTypes.object,
+    content: PropTypes.any,
     error: PropTypes.any,
   };
 
@@ -20,8 +20,7 @@ export default class FDAPage extends Component {
   }
 
   render() {
-    const { content, error } = this.props;
-    console.log(content);
+    const { error } = this.props;
 
     if (error) {
       return <div>It Broke</div>;
@@ -30,7 +29,7 @@ export default class FDAPage extends Component {
     return (
       <Fragment>
         <Header />
-        <TwoColumn data-article-body>
+        <TwoColumn data-article-body marginTop={ 70 }>
           <MainColumn>Here are things!</MainColumn>
           <Sidebar>And maybe other things?</Sidebar>
         </TwoColumn>

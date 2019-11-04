@@ -6,7 +6,6 @@ let lastStateTime;
 
 module.exports = {
   assetPrefix: '/',
-  clientBootstrap: ['./client/entry'],
 
   webpack: (config, { dev }) => {
     const $entry = config.entry;
