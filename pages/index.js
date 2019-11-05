@@ -12,8 +12,8 @@ import TwoColumn, {
   Sidebar,
 } from '../lib/components/ui/layout/two-column';
 
-const RSSItem = styled('p')`
-  margin-bottom: 1rem;
+const RSSItem = styled('div')`
+  margin: 1.5rem 0 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px dotted #ccc;
   a {
@@ -36,7 +36,7 @@ export default class FDAPage extends Component {
   static async getInitialProps() {
     let res, err;
     try {
-      res = await fetch('https://www.wired.com/feed/rss')
+      res = await fetch('https://www.bonappetit.com/feed/rss')
         .then(response => response.text())
         .then(txt => parser.parseStringPromise(txt))
         .then(json => json)
@@ -62,9 +62,9 @@ export default class FDAPage extends Component {
         <Header />
         <TwoColumn data-article-body>
           <MainColumn>
-            { content.item.map((entry) => {
+            { content.item.map((entry, i) => {
               return (
-                <RSSItem>
+                <RSSItem key={i}>
                   <a href={ entry.link[0] }><img src={entry['media:thumbnail'][0].$.url}
                                                  alt={entry.title[0]} /></a>
                   <a href={ entry.link[0] }>{ entry.title[0] }</a><br/>
