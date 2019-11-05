@@ -60,7 +60,7 @@ export default class FDAPage extends Component {
     return (
       <Fragment>
         <Header />
-        <TwoColumn data-article-body marginTop={ 70 }>
+        <TwoColumn data-article-body>
           <MainColumn>
             { content.item.map((entry) => {
               return (
