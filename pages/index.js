@@ -22,7 +22,7 @@ const RSSItem = styled('div')`
   }
 `
 const SmallText = styled('div')`
-  font-size: 80%;
+  font-size: 90%;
   color: #444;
   line-height: 1rem;
 `
