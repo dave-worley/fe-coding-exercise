@@ -7,7 +7,7 @@ const { renderToHTML } = require('@kpdecker/next/dist/server/render');
 const { httpCache } = require('../cache');
 
 const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev, dir: '.', quiet: true });
+const app = next({ dev, dir: '.', quiet: false });
 
 async function register(server) {
   await app.prepare();
