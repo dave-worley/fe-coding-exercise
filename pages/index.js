@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import fetch from 'isomorphic-unfetch'
 import xml2js from 'xml2js'
+import styled from 'react-emotion'
 
 const parser = xml2js.Parser({ trim: true })
 
@@ -10,6 +11,21 @@ import TwoColumn, {
   MainColumn,
   Sidebar,
 } from '../lib/components/ui/layout/two-column';
+
+const RSSItem = styled('p')`
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dotted #ccc;
+  a {
+    font-size: 200%;
+    font-weight: 900;
+  }
+`
+const SmallText = styled('div')`
+  font-size: 80%;
+  color: #444;
+  line-height: 1rem;
+`
 
 export default class FDAPage extends Component {
   static propTypes = {
@@ -20,7 +36,7 @@ export default class FDAPage extends Component {
   static async getInitialProps() {
     const res = await fetch('https://www.wired.com/feed/rss')
       .then(response => response.text())
-      .then(txt => parser.parseStringPromise(txt.replace('\ufeff', '')))
+      .then(txt => parser.parseStringPromise(txt))
       .then(json => json)
     return {
       content: res.rss.channel[0],
@@ -29,13 +45,6 @@ export default class FDAPage extends Component {
 
   render() {
     const { content, error } = this.props;
-
-    if (content) {
-      console.log('-----------------------------------------------------------------')
-      console.dir(content)
-      console.log(content)
-      console.log('-----------------------------------------------------------------')
-    }
 
     if (error) {
       return <div>It Broke</div>;
@@ -48,12 +57,12 @@ export default class FDAPage extends Component {
           <MainColumn>
             { content.item.map((entry) => {
               return (
-                <p>
-                  <img src={entry['media:thumbnail'][0].$.url}
-                       alt={entry.title[0]} />
+                <RSSItem>
+                  <a href={ entry.link[0] }><img src={entry['media:thumbnail'][0].$.url}
+                                                 alt={entry.title[0]} /></a>
                   <a href={ entry.link[0] }>{ entry.title[0] }</a><br/>
-                  { entry.description[0] }
-                </p>
+                  <SmallText>{ entry.description[0] }</SmallText>
+                </RSSItem>
               )
             }) }
           </MainColumn>
