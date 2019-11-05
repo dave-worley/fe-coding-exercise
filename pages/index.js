@@ -34,12 +34,19 @@ export default class FDAPage extends Component {
   };
 
   static async getInitialProps() {
-    const res = await fetch('https://www.wired.com/feed/rss')
-      .then(response => response.text())
-      .then(txt => parser.parseStringPromise(txt))
-      .then(json => json)
+    let res, err;
+    try {
+      res = await fetch('https://www.wired.com/feed/rss')
+        .then(response => response.text())
+        .then(txt => parser.parseStringPromise(txt))
+        .then(json => json)
+    } catch (e) {
+      err = e
+    }
+
     return {
-      content: res.rss.channel[0],
+      content: res ? res.rss.channel[0] : res,
+      error: err
     };
   }
 
