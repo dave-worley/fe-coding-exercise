@@ -4,7 +4,7 @@ const { methodCache } = require('../cache');
 
 exports.register = (server, options, next) => {
   server.promise('dataSource', async () => ['look!'], {
-    //cache: methodCache.hour,
+    cache: methodCache.hour,
     generateKey() {
       return 'data';
     },
